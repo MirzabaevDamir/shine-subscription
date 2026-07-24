@@ -1,15 +1,27 @@
 import { User, Car, CreditCard, Bell, Shield, HelpCircle, LogOut, ChevronRight, Star } from "lucide-react";
 
-const menuItems = [
-  { icon: Car, label: "My Vehicles", detail: "2 vehicles" },
-  { icon: CreditCard, label: "Payment Methods", detail: "Visa •••• 4242" },
-  { icon: Bell, label: "Notifications", detail: "On" },
-  { icon: Shield, label: "Privacy & Security", detail: "" },
-  { icon: Star, label: "Refer a Friend", detail: "Earn $10" },
-  { icon: HelpCircle, label: "Help & Support", detail: "" },
-];
+interface ProfileScreenProps {
+  onNavigate: (page: string) => void;
+}
 
-const ProfileScreen = () => {
+const menuItems = [
+  { icon: Car, label: "My Vehicles", detail: "2 vehicles", action: "navigate", target: "vehicles" },
+  { icon: CreditCard, label: "Payment Methods", detail: "Rahmat", action: "link", target: "https://rahmat.uz" },
+  { icon: Bell, label: "Notifications", detail: "On", action: "none", target: "" },
+  { icon: Shield, label: "Privacy & Security", detail: "", action: "navigate", target: "privacy" },
+  { icon: Star, label: "Refer a Friend", detail: "Earn $10", action: "none", target: "" },
+  { icon: HelpCircle, label: "Help & Support", detail: "", action: "navigate", target: "help" },
+] as const;
+
+const ProfileScreen = ({ onNavigate }: ProfileScreenProps) => {
+  const handleClick = (item: (typeof menuItems)[number]) => {
+    if (item.action === "navigate") {
+      onNavigate(item.target);
+    } else if (item.action === "link") {
+      window.open(item.target, "_blank", "noopener,noreferrer");
+    }
+  };
+
   return (
     <div className="min-h-screen pb-28 pt-14 px-5">
       {/* Profile Header */}
@@ -18,7 +30,7 @@ const ProfileScreen = () => {
           <User size={28} className="text-primary-foreground" />
         </div>
         <div>
-          <h1 className="font-heading text-xl font-bold">Alex Johnson</h1>
+          <h1 className="font-heading text-xl font-bold">Qoziboyev Teshavoy</h1>
           <p className="text-muted-foreground text-sm">Gold Member since Jan 2025</p>
         </div>
       </div>
@@ -77,6 +89,7 @@ const ProfileScreen = () => {
         {menuItems.map((item, i) => (
           <button
             key={item.label}
+            onClick={() => handleClick(item)}
             className={`w-full flex items-center justify-between p-4 hover:bg-secondary/50 transition-colors ${
               i < menuItems.length - 1 ? "border-b border-border" : ""
             }`}

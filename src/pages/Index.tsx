@@ -6,6 +6,9 @@ import LocationsScreen from "@/components/LocationsScreen";
 import ProfileScreen from "@/components/ProfileScreen";
 import ScanScreen from "@/components/ScanScreen";
 import HistoryScreen from "@/components/HistoryScreen";
+import VehiclesScreen from "@/components/VehiclesScreen";
+import PrivacyScreen from "@/components/PrivacyScreen";
+import HelpScreen from "@/components/HelpScreen";
 
 const Index = () => {
   const [activePage, setActivePage] = useState("home");
@@ -19,11 +22,17 @@ const Index = () => {
       case "locations":
         return <LocationsScreen />;
       case "profile":
-        return <ProfileScreen />;
+        return <ProfileScreen onNavigate={setActivePage} />;
       case "scan":
         return <ScanScreen onNavigate={setActivePage} />;
       case "history":
         return <HistoryScreen onNavigate={setActivePage} />;
+      case "vehicles":
+        return <VehiclesScreen onNavigate={setActivePage} />;
+      case "privacy":
+        return <PrivacyScreen onNavigate={setActivePage} />;
+      case "help":
+        return <HelpScreen onNavigate={setActivePage} />;
       default:
         return <HomeScreen onNavigate={setActivePage} />;
     }
