@@ -4,9 +4,9 @@ const plans = [
   {
     name: "Basic",
     price: "$19",
-    period: "/month",
+    period: "/mo",
     icon: Zap,
-    features: ["4 washes per month", "Exterior only", "Standard soap", "1 vehicle"],
+    features: ["4 washes/mo", "Exterior only", "1 vehicle"],
     gradient: "gradient-card",
     popular: false,
     border: "border-border",
@@ -15,9 +15,9 @@ const plans = [
   {
     name: "Gold",
     price: "$39",
-    period: "/month",
+    period: "/mo",
     icon: Star,
-    features: ["20 washes per month", "Interior + Exterior", "Premium products", "2 vehicles", "Priority queue"],
+    features: ["20 washes/mo", "Interior + Ext.", "2 vehicles", "Priority queue"],
     gradient: "gradient-primary",
     popular: true,
     border: "border-primary",
@@ -26,9 +26,9 @@ const plans = [
   {
     name: "Platinum",
     price: "$69",
-    period: "/month",
+    period: "/mo",
     icon: Crown,
-    features: ["Unlimited washes", "Full detail service", "Ceramic coating", "4 vehicles", "VIP lounge access", "Free tire shine"],
+    features: ["Unlimited", "Full detail", "4 vehicles", "VIP lounge"],
     gradient: "gradient-card",
     popular: false,
     border: "border-border",
@@ -38,62 +38,58 @@ const plans = [
 
 const PlansScreen = () => {
   return (
-    <div className="min-h-screen pb-28 pt-14 px-5">
+    <div className="min-h-screen pb-28 pt-14 px-4 flex flex-col">
       <h1 className="font-heading text-2xl font-bold mb-1">Choose Your Plan</h1>
-      <p className="text-muted-foreground text-sm mb-6">
-        Select the perfect wash plan for your needs
+      <p className="text-muted-foreground text-sm mb-5">
+        All plans, side by side
       </p>
 
-      <div className="space-y-4">
+      <div className="grid grid-cols-3 gap-2.5 flex-1">
         {plans.map((plan) => (
           <div
             key={plan.name}
-            className={`${plan.gradient} rounded-2xl p-5 border ${plan.border} relative overflow-hidden`}
+            className={`${plan.gradient} rounded-2xl p-3 border ${plan.border} relative overflow-hidden flex flex-col`}
           >
             {plan.popular && (
-              <div className="absolute top-3 right-3 bg-primary-foreground/20 text-primary-foreground text-[10px] font-bold font-heading px-3 py-1 rounded-full uppercase tracking-wider">
-                Most Popular
+              <div className="absolute top-2 right-2 bg-primary-foreground/20 text-primary-foreground text-[8px] font-bold font-heading px-2 py-0.5 rounded-full uppercase tracking-wider">
+                Best
               </div>
             )}
-            <div className="flex items-center gap-3 mb-3">
-              <div className={`w-10 h-10 rounded-xl ${plan.popular ? "bg-primary-foreground/20" : "bg-secondary"} flex items-center justify-center`}>
-                <plan.icon size={20} className={plan.iconColor} />
-              </div>
-              <div>
-                <h3 className={`font-heading text-lg font-bold ${plan.popular ? "text-primary-foreground" : ""}`}>
-                  {plan.name}
-                </h3>
-              </div>
+            <div className={`w-8 h-8 rounded-lg ${plan.popular ? "bg-primary-foreground/20" : "bg-secondary"} flex items-center justify-center mb-2`}>
+              <plan.icon size={16} className={plan.iconColor} />
             </div>
-            <div className="flex items-baseline gap-1 mb-4">
-              <span className={`font-heading text-3xl font-bold ${plan.popular ? "text-primary-foreground" : ""}`}>
+            <h3 className={`font-heading text-sm font-bold mb-1 ${plan.popular ? "text-primary-foreground" : ""}`}>
+              {plan.name}
+            </h3>
+            <div className="flex items-baseline gap-0.5 mb-3">
+              <span className={`font-heading text-xl font-bold ${plan.popular ? "text-primary-foreground" : ""}`}>
                 {plan.price}
               </span>
-              <span className={`text-sm ${plan.popular ? "text-primary-foreground/70" : "text-muted-foreground"}`}>
+              <span className={`text-[10px] ${plan.popular ? "text-primary-foreground/70" : "text-muted-foreground"}`}>
                 {plan.period}
               </span>
             </div>
-            <ul className="space-y-2 mb-5">
+            <ul className="space-y-1.5 mb-3 flex-1">
               {plan.features.map((feature) => (
-                <li key={feature} className="flex items-center gap-2">
+                <li key={feature} className="flex items-start gap-1">
                   <Check
-                    size={14}
-                    className={plan.popular ? "text-primary-foreground" : "text-primary"}
+                    size={11}
+                    className={`mt-0.5 shrink-0 ${plan.popular ? "text-primary-foreground" : "text-primary"}`}
                   />
-                  <span className={`text-sm ${plan.popular ? "text-primary-foreground/90" : "text-muted-foreground"}`}>
+                  <span className={`text-[10px] leading-tight ${plan.popular ? "text-primary-foreground/90" : "text-muted-foreground"}`}>
                     {feature}
                   </span>
                 </li>
               ))}
             </ul>
             <button
-              className={`w-full py-3 rounded-xl font-heading font-semibold text-sm transition-all ${
+              className={`w-full py-2 rounded-lg font-heading font-semibold text-[10px] transition-all ${
                 plan.popular
                   ? "bg-primary-foreground text-primary hover:opacity-90"
                   : "gradient-primary text-primary-foreground hover:opacity-90"
               }`}
             >
-              {plan.popular ? "Current Plan" : "Subscribe"}
+              {plan.popular ? "Current" : "Select"}
             </button>
           </div>
         ))}

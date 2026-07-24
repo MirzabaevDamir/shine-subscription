@@ -69,12 +69,13 @@ const HomeScreen = ({ onNavigate }: HomeScreenProps) => {
         <h2 className="font-heading text-lg font-semibold mb-4">Quick Actions</h2>
         <div className="grid grid-cols-3 gap-3">
           {[
-            { icon: Droplets, label: "Book Wash", color: "gradient-primary" },
-            { icon: Clock, label: "History", color: "gradient-card" },
-            { icon: Sparkles, label: "Upgrade", color: "gradient-gold" },
+            { icon: Droplets, label: "Book Wash", color: "gradient-primary", page: null },
+            { icon: Clock, label: "History", color: "gradient-card", page: "history" },
+            { icon: Sparkles, label: "Upgrade", color: "gradient-gold", page: "plans" },
           ].map((action) => (
             <button
               key={action.label}
+              onClick={() => action.page && onNavigate(action.page)}
               className={`${action.color} rounded-2xl p-4 flex flex-col items-center gap-2 border border-border hover:scale-105 transition-transform`}
             >
               <action.icon size={24} className={action.color === "gradient-card" ? "text-primary" : "text-primary-foreground"} />
@@ -90,7 +91,10 @@ const HomeScreen = ({ onNavigate }: HomeScreenProps) => {
       <div className="px-5 mt-6">
         <div className="flex items-center justify-between mb-4">
           <h2 className="font-heading text-lg font-semibold">Recent Washes</h2>
-          <button className="text-primary text-xs font-heading flex items-center gap-1">
+          <button
+            onClick={() => onNavigate("history")}
+            className="text-primary text-xs font-heading flex items-center gap-1"
+          >
             See All <ChevronRight size={14} />
           </button>
         </div>

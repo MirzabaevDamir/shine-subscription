@@ -57,53 +57,41 @@ const LocationsScreen = () => {
         </div>
       </div>
 
-      <div className="space-y-4">
+      <div className="divide-y divide-border border-t border-b border-border">
         {locations.map((loc) => (
           <div
             key={loc.name}
-            className="gradient-card rounded-2xl overflow-hidden border border-border"
+            className="flex items-center justify-between py-4 gap-3"
           >
-            <img
-              src={loc.image}
-              alt={loc.name}
-              className="w-full h-32 object-cover"
-              loading="lazy"
-              width={800}
-              height={600}
-            />
-            <div className="p-4">
-              <div className="flex items-start justify-between mb-2">
-                <h3 className="font-heading font-semibold">{loc.name}</h3>
-                <div className="flex items-center gap-1">
-                  <Star size={12} className="text-gold fill-gold" />
-                  <span className="text-xs font-heading font-medium">{loc.rating}</span>
-                </div>
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="w-10 h-10 rounded-xl gradient-card border border-border flex items-center justify-center shrink-0">
+                <MapPin size={18} className="text-primary" />
               </div>
-              <p className="text-xs text-muted-foreground mb-3">{loc.address}</p>
-              <div className="flex items-center gap-4 text-xs text-muted-foreground mb-3">
-                <span className="flex items-center gap-1">
-                  <Navigation size={11} className="text-primary" />
-                  {loc.distance}
-                </span>
-                <span className="flex items-center gap-1">
-                  <Clock size={11} className="text-primary" />
-                  {loc.hours}
-                </span>
-              </div>
-              <div className="flex items-center justify-between">
-                <div className="flex gap-3">
-                  <span className="text-[11px] bg-secondary px-2.5 py-1 rounded-lg font-heading">
-                    {loc.bays} bays
-                  </span>
-                  <span className="text-[11px] bg-secondary px-2.5 py-1 rounded-lg font-heading text-success">
-                    Wait: {loc.wait}
-                  </span>
+              <div className="min-w-0">
+                <div className="flex items-center gap-1.5 mb-0.5">
+                  <h3 className="font-heading font-semibold text-sm truncate">{loc.name}</h3>
+                  <div className="flex items-center gap-0.5 shrink-0">
+                    <Star size={10} className="text-gold fill-gold" />
+                    <span className="text-[10px] font-heading font-medium">{loc.rating}</span>
+                  </div>
                 </div>
-                <button className="gradient-primary text-primary-foreground text-xs font-heading font-semibold px-4 py-2 rounded-lg">
-                  Navigate
-                </button>
+                <p className="text-xs text-muted-foreground truncate mb-1">{loc.address}</p>
+                <div className="flex items-center gap-3 text-[10px] text-muted-foreground">
+                  <span className="flex items-center gap-1">
+                    <Navigation size={10} className="text-primary" />
+                    {loc.distance}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Clock size={10} className="text-primary" />
+                    {loc.hours}
+                  </span>
+                  <span className="text-success">Wait: {loc.wait}</span>
+                </div>
               </div>
             </div>
+            <button className="gradient-primary text-primary-foreground text-[11px] font-heading font-semibold px-3 py-2 rounded-lg shrink-0">
+              Navigate
+            </button>
           </div>
         ))}
       </div>

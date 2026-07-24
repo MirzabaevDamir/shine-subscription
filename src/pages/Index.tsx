@@ -4,6 +4,8 @@ import HomeScreen from "@/components/HomeScreen";
 import PlansScreen from "@/components/PlansScreen";
 import LocationsScreen from "@/components/LocationsScreen";
 import ProfileScreen from "@/components/ProfileScreen";
+import ScanScreen from "@/components/ScanScreen";
+import HistoryScreen from "@/components/HistoryScreen";
 
 const Index = () => {
   const [activePage, setActivePage] = useState("home");
@@ -18,6 +20,10 @@ const Index = () => {
         return <LocationsScreen />;
       case "profile":
         return <ProfileScreen />;
+      case "scan":
+        return <ScanScreen onNavigate={setActivePage} />;
+      case "history":
+        return <HistoryScreen onNavigate={setActivePage} />;
       default:
         return <HomeScreen onNavigate={setActivePage} />;
     }
